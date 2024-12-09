@@ -1,35 +1,43 @@
-Estudos backend API, esse projeto é para gerenciar tarefas CRUD
+ToDo List API
 
-## Tecnologias usadas
- 
-[Spring Boot]\
-[Spring MVC]\
-[Spring Data JPA]\
-[Mysql]\
+Este projeto é uma API para gerenciar tarefas (CRUD) usando Spring Boot.
 
+Tecnologias Usadas
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- MySQL
 
-## Práticas adotadas
-
+Práticas Adotadas
 - API REST
 - Consultas com Spring Data JPA
 - Injeção de Dependências
-- Tratamento de respostas de erro
-- Geração automática do Swagger com a OpenAPI 3
+- Tratamento de Respostas de Erro
+- Geração Automática do Swagger com a OpenAPI 3\
 
-## Como Executar
 
+
+```markdown
+
+# Como Executar
+   git clone https://github.com/lipesc/todo-java.git
+   cd todo-java
+
+Configure o MySQL no arquivo `application.properties` criar um database e usuario, senha ou usar o root padrão.
+
+Execute a aplicação:
+  
+acessível em [http://localhost:8080](http://localhost:8080).
+
+Swagger em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 ```
-A API poderá ser acessada em [localhost:8080](http://localhost:8080).
-O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
-## API Endpoints
-
-Para testas os endpoints [httpie]:
-
-- Criar Tarefa 
+# API Endpoints
+## Criar Tarefa
+```bash
+http POST :8080/api/tasks nome="task 1" descricao="testes 1" prioridade=1
 ```
- http POST :8080/api/tasks nome="task 1" descricao="testes 1" prioridade=1
-
+Resposta:
+```json
 [
   {
     "descricao": "testes 1",
@@ -41,10 +49,12 @@ Para testas os endpoints [httpie]:
 ]
 ```
 
-- Listar Tarefas
+# Listar Tarefas
+```bash
+http GET :8080/api/tasks
 ```
- http GET :8080/api/tasks
-
+Resposta:
+```json
 [
   {
     "descricao": "testes 1",
@@ -56,23 +66,29 @@ Para testas os endpoints [httpie]:
 ]
 ```
 
-- Atualizar Tarefa
+# Atualizar Tarefa
+```bash
+http PUT :8080/api/tasks/1 nome="task 1 updated" descricao="testes 1 updated" prioridade=2
 ```
- http PUT :8080/api/tasks/1 nome="task 1 Atualizada" descricao="testes 1 Atualizada" prioridade=2 
-
-[
-  {
-    "descricao": "testes 1 Atualizada",
-    "id": 1,
-    "nome": "task 1 Atualizada",
-    "prioridade": 2,
-    "realizado": false
-  }
-]
+Resposta:
+```json
+{
+  "descricao": "testes 1 updated",
+  "id": 1,
+  "nome": "task 1 updated",
+  "prioridade": 2,
+  "realizado": false
+}
 ```
-
-- Remover Tarefa
-```
+ # Deletar Tarefa
+```bash
 http DELETE :8080/api/tasks/1
-
 ```
+Resposta:
+```json
+{
+  "message": "Tarefa deletada com sucesso"
+}
+```
+
+[![Java CI](https://github.com/lipesc/todo-java/actions/workflows/main.yml/badge.svg)](https://github.com/lipesc/todo-java/actions/workflows/main.yml)
